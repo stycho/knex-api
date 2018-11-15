@@ -4,12 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev-server": "./node_modules/nodemon/bin/nodemon.js server.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "knex": "^0.15.2",
     "pg": "^7.6.1"
   },

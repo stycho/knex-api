@@ -11,4 +11,3 @@ module.exports = function sum(arr) {
     return arr.reduce((acc, val) => {
         return acc + val;
     })
-}
