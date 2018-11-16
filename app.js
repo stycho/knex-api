@@ -1,6 +1,4 @@
-const knexConfig = require('./knexfile');
-const env = 'development';
-const knex = require('knex')(knexConfig[env]);
+const knex = require('/db/knex.js');
 
 knex('famous_people').asCallback((err, rows) => {
     console.log(err || rows);
