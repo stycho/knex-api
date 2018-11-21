@@ -1,16 +1,77 @@
 const express = require('express');
 const router = express.Router();
-const knex = require('../db/knex');
 
-router.get('/', (req, res) => {
-  knex.select().from('transactions')
-    .then(transactions => {
-      res.send(transactions);
-    })
-    .catch(err => {
-      console.log('Knex select Error: ', err);
-    });
-});
+module.exports = (transactionHelpers) => {
+  router.get('/', (req, res) => {
+    transactionHelpers.getAllTransactions()
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    
+  });
+
+  // router.get('/', (req, res) => {
+  //   transactionHelpers.getAllTransactions((err, transactions) => {
+  //     if (err) {
+  //       console.log('Knex select Error: ', err);
+  //     } else {
+  //       res.send(transactions);
+  //     }
+  //   });
+  // });
+
+  return router;
+}
+
+// router.get('/', (req, res) => {
+//   dataHelper.getAllTransactions(req, res);
+//   // knex.select().from('transactions')
+//   //   .then(transactions => {
+//   //     res.send(transactions);
+//   //   })
+//   //   .catch(err => {
+//   //     console.log('Knex select Error: ', err);
+//   //   });
+// });
+
+// router.get('/:id', (req, res) => {
+//   const userId = req.params.id;
+//   knex.select()
+//     .from('transactions')
+//     .where('id', userId)
+//     .then(transactions => {
+//       res.send(transactions);
+//     })
+//     .catch(err => {
+//       console.log('Knex select Error: ', err);
+//     });
+// });
+
+// router.post('/', (req, res) => {
+//   const newTransaction = req.body;
+//   knex('transactions').returning('id').insert(newTransaction)
+//     .then(([ transactionId ]) => {
+//       console.log(transactionId);
+//       knex.select('id', 'amount_cents', 'created_at').where('id', transactionId).from('transactions')
+//         .then((transactions) => {
+//           res.send(transactions);
+//         })
+//         .catch(err => {
+//           console.log(err);
+//         });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
+
+
+
+
 
 // app.get('/api/transactions/:id', (req, res) => {
 //   console.log(req.params);
@@ -42,4 +103,4 @@ router.get('/', (req, res) => {
 //     })
 // });
 
-module.exports = router;
+// module.exports = router;
